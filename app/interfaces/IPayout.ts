@@ -1,6 +1,6 @@
 export interface IPayout {
   username: string;
-  date: string;
+  dateAndTime: string;
   status: string;
   value: string;
 }
