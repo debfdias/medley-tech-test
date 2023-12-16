@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Header from "./components/Header";
+import Loader from "./components/Loader";
 import Table from "./components/Table";
 import { IPagination } from "./interfaces/IPagination";
 import { IPayout } from "./interfaces/IPayout";
@@ -47,7 +48,8 @@ export default function Home() {
     <main>
       <Wrapper>
         <Header />
-        <Table />
+        {loading ? <Loader /> : <Table />}
+
         {payouts.map((item: any) => {
           return <>{JSON.stringify(item)}</>;
         })}

@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
   border-radius: 8px;
   background-color: #f6f6f6;
   border: 1px solid #d0d0d0;
+  height: 40px;
 `;
 
 export const Input = styled.input`
