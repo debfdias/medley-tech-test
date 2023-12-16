@@ -27,6 +27,16 @@ export const PrevIcon = styled(ArrowLeft)`
   }
 `;
 
+export const PrevIconDisabled = styled(PrevIcon)`
+  color: #d2d2d2;
+  cursor: not-allowed;
+`;
+
+export const NextIconDisabled = styled(NextIcon)`
+  color: #d2d2d2;
+  cursor: not-allowed;
+`;
+
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;

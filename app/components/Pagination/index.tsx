@@ -1,4 +1,12 @@
-import { Button, ButtonActive, NextIcon, PrevIcon, Wrapper } from "./styles";
+import {
+  Button,
+  ButtonActive,
+  NextIcon,
+  NextIconDisabled,
+  PrevIcon,
+  PrevIconDisabled,
+  Wrapper,
+} from "./styles";
 
 interface IPaginationProps {
   currentPage: number;
@@ -11,8 +19,10 @@ export default function Pagination({
   onPageChange,
 }: IPaginationProps) {
   function handlePageChange(page: number) {
-    if (onPageChange) {
-      onPageChange(page);
+    if (page > 0 && page <= totalPage) {
+      if (onPageChange) {
+        onPageChange(page);
+      }
     }
   }
 
@@ -42,9 +52,18 @@ export default function Pagination({
 
   return (
     <Wrapper>
-      <PrevIcon onClick={() => handlePageChange(currentPage - 1)} size={24} />
+      {currentPage != 1 ? (
+        <PrevIcon onClick={() => handlePageChange(currentPage - 1)} size={24} />
+      ) : (
+        <PrevIconDisabled size={24} />
+      )}
+
       {middleRangeButtons()}
-      <NextIcon onClick={() => handlePageChange(currentPage + 1)} size={24} />
+      {currentPage != totalPage ? (
+        <NextIcon onClick={() => handlePageChange(currentPage + 1)} size={24} />
+      ) : (
+        <NextIconDisabled size={24} />
+      )}
     </Wrapper>
   );
 }
