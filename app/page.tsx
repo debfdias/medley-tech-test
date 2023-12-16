@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
+import Pagination from "./components/Pagination";
 import SearchBox from "./components/SearchBox";
 import Table from "./components/Table";
 import { IPagination } from "./interfaces/IPagination";
@@ -18,6 +19,7 @@ export default function Home() {
     page: 1,
     elementsPerPage: 10,
   });
+  const [totalPages, setTotalPages] = useState(0);
 
   const fetchPayouts = useCallback(async () => {
     const payouts = await getPayouts(
@@ -26,6 +28,9 @@ export default function Home() {
     );
 
     setPayouts(payouts.data);
+    setTotalPages(
+      Math.ceil(payouts.metadata.totalCount / pagination.elementsPerPage)
+    );
   }, [pagination]);
 
   useEffect(() => {
@@ -43,7 +48,7 @@ export default function Home() {
     // } else {
 
     // }
-  }, [pagination, fetchPayouts]);
+  }, [fetchPayouts, pagination, totalPages]);
 
   useEffect(() => {
     console.log("searching!");
@@ -59,8 +64,12 @@ export default function Home() {
             onChangeSearch={(inputSearch) => setSearch(inputSearch)}
           />
         </HeaderContainer>
-        {search}
         {loading ? <Loader /> : <Table data={payouts} />}
+        <Pagination
+          currentPage={pagination.page}
+          totalPage={totalPages}
+          onPageChange={(page) => setPagination({ ...pagination, page: page })}
+        />
       </Wrapper>
     </main>
   );
