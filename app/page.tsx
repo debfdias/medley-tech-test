@@ -41,17 +41,27 @@ export default function Home() {
   const searchPayouts = useCallback(async () => {
     setLoading(true);
     const payouts = await queryPayouts(search);
+    let formattedPayouts = [];
 
-    const formattedPayouts = payouts.slice(
+    formattedPayouts = payouts.slice(
       (pagination.page - 1) * pagination.elementsPerPage,
       pagination.elementsPerPage * pagination.page
     );
 
+    if (payouts.length > 0 && formattedPayouts.length === 0) {
+      formattedPayouts = payouts;
+    }
+
     setPayouts(formattedPayouts);
     setTotalPages(totalPagesCount(payouts.length, pagination.elementsPerPage));
-    setPagination({ ...pagination, page: 1 });
+    if (formattedPayouts.length < pagination.page) {
+      setPagination((pagination) => ({ ...pagination, page: 1 }));
+    } else {
+      setPagination({ ...pagination });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [search, pagination.page]);
 
   useEffect(() => {
     try {
