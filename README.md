@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Medley Tech test
 
-## Getting Started
+A simple real time data table.
 
-First, run the development server:
+## :rocket: Technologies
+
+This project was made using the following technologies:
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [NextJS](https://nextjs.org/)
+- [Styled components](https://styled-components.com/)
+
+## :computer: How to run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone repository
+$ git clone https://github.com/debfdias/medley-tech-test/
+
+# Access folder
+$ cd medley-tech-test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+# Install dependencies
+$ yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Create an .env.local file in project's root.
 
-## Learn More
+```bash
+# Fill the .env.local file
 
-To learn more about Next.js, take a look at the following resources:
+NEXT_PUBLIC_API_URL=https://theseus-staging.lithium.ventures/api/v1/analytics/tech-test
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+# Run aplication
+$ yarn dev
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+## :framed_picture: Screenshots
+<img width="800" alt="Screen Shot 2023-12-17 at 11 07 59" src="https://github.com/debfdias/medley-tech-test/assets/15907429/dd6f1385-5638-48f2-83f6-4433b7d2025f">
+<img width="800" alt="Screen Shot 2023-12-17 at 11 08 12" src="https://github.com/debfdias/medley-tech-test/assets/15907429/708190ce-cf82-41ee-9717-783f1cdd4ffc">
