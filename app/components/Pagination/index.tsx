@@ -12,11 +12,13 @@ interface IPaginationProps {
   currentPage: number;
   totalPage: number;
   onPageChange?: (page: number) => void;
+  noData: boolean;
 }
 export default function Pagination({
   currentPage,
   totalPage,
   onPageChange,
+  noData,
 }: IPaginationProps) {
   function handlePageChange(page: number) {
     if (page > 0 && page <= totalPage) {
@@ -58,7 +60,7 @@ export default function Pagination({
         <PrevIconDisabled size={24} />
       )}
       {middleRangeButtons()}
-      {currentPage != totalPage && currentPage != 1 ? (
+      {currentPage != totalPage && noData ? (
         <NextIcon onClick={() => handlePageChange(currentPage + 1)} size={24} />
       ) : (
         <NextIconDisabled size={24} />

@@ -93,6 +93,7 @@ export default function Home() {
           currentPage={pagination.page}
           totalPage={totalPages}
           onPageChange={(page) => setPagination({ ...pagination, page: page })}
+          noData={!!payouts.length}
         />
       </Wrapper>
     </main>
