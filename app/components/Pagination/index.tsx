@@ -53,18 +53,28 @@ export default function Pagination({
   }
 
   return (
-    <Wrapper>
-      {currentPage != 1 ? (
-        <PrevIcon onClick={() => handlePageChange(currentPage - 1)} size={24} />
-      ) : (
-        <PrevIconDisabled size={24} />
+    <>
+      {noData && (
+        <Wrapper>
+          {currentPage != 1 ? (
+            <PrevIcon
+              onClick={() => handlePageChange(currentPage - 1)}
+              size={24}
+            />
+          ) : (
+            <PrevIconDisabled size={24} />
+          )}
+          {middleRangeButtons()}
+          {currentPage != totalPage && noData ? (
+            <NextIcon
+              onClick={() => handlePageChange(currentPage + 1)}
+              size={24}
+            />
+          ) : (
+            <NextIconDisabled size={24} />
+          )}
+        </Wrapper>
       )}
-      {middleRangeButtons()}
-      {currentPage != totalPage && noData ? (
-        <NextIcon onClick={() => handlePageChange(currentPage + 1)} size={24} />
-      ) : (
-        <NextIconDisabled size={24} />
-      )}
-    </Wrapper>
+    </>
   );
 }
