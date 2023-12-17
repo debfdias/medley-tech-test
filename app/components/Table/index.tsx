@@ -19,7 +19,7 @@ export default function Table({ data }: TableProps) {
   return (
     <>
       <Wrapper>
-        {data.length === 0 ? (
+        {data?.length === 0 ? (
           <TableEmpty>Nothing found!</TableEmpty>
         ) : (
           <TableContainer>
@@ -32,7 +32,7 @@ export default function Table({ data }: TableProps) {
               </tr>
             </thead>
             <tbody>
-              {data.map((entry: IPayout, index: number) => (
+              {data?.map((entry: IPayout, index: number) => (
                 <TableRow key={index}>
                   <TableCell>{entry.username}</TableCell>
                   <TableCell>

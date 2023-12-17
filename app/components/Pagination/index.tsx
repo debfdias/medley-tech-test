@@ -35,7 +35,7 @@ export default function Pagination({
       const pageIndex = startPage + index;
 
       return (
-        <>
+        <div key={index}>
           {pageIndex === currentPage ? (
             <ButtonActive onClick={() => handlePageChange(pageIndex)}>
               {pageIndex}
@@ -45,7 +45,7 @@ export default function Pagination({
               {pageIndex}
             </Button>
           )}
-        </>
+        </div>
       );
     });
   }
@@ -57,9 +57,8 @@ export default function Pagination({
       ) : (
         <PrevIconDisabled size={24} />
       )}
-
       {middleRangeButtons()}
-      {currentPage != totalPage ? (
+      {currentPage != totalPage && currentPage != 1 ? (
         <NextIcon onClick={() => handlePageChange(currentPage + 1)} size={24} />
       ) : (
         <NextIconDisabled size={24} />

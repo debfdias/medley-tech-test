@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 15rem;
+  padding: 10rem 0rem;
 `;
 
 export const Spinner2 = styled.div`

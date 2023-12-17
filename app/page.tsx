@@ -9,6 +9,7 @@ import Table from "./components/Table";
 import { IPagination } from "./interfaces/IPagination";
 import { IPayout } from "./interfaces/IPayout";
 import getPayouts from "./services/getPayouts";
+import queryPayouts from "./services/queryPayouts";
 import { HeaderContainer, Wrapper } from "./styles";
 
 export default function Home() {
@@ -21,6 +22,10 @@ export default function Home() {
   });
   const [totalPages, setTotalPages] = useState(0);
 
+  function totalPagesCount(total: number, elements: number) {
+    return Math.ceil(total / elements);
+  }
+
   const fetchPayouts = useCallback(async () => {
     const payouts = await getPayouts(
       pagination.page,
@@ -29,30 +34,49 @@ export default function Home() {
 
     setPayouts(payouts.data);
     setTotalPages(
-      Math.ceil(payouts.metadata.totalCount / pagination.elementsPerPage)
+      totalPagesCount(payouts.metadata.totalCount, pagination.elementsPerPage)
     );
   }, [pagination]);
+
+  const searchPayouts = useCallback(async () => {
+    setLoading(true);
+    const payouts = await queryPayouts(search);
+
+    const formattedPayouts = payouts.slice(
+      (pagination.page - 1) * pagination.elementsPerPage,
+      pagination.elementsPerPage * pagination.page
+    );
+
+    setPayouts(formattedPayouts);
+    setTotalPages(totalPagesCount(payouts.length, pagination.elementsPerPage));
+    setPagination({ ...pagination, page: 1 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
 
   useEffect(() => {
     try {
       setLoading(true);
-      fetchPayouts();
+      if (search === "") {
+        fetchPayouts();
+      }
     } catch (e) {
       console.log(e);
     } finally {
       setLoading(false);
     }
-
-    // if (!!search) {
-    //   // query
-    // } else {
-
-    // }
-  }, [fetchPayouts, pagination, totalPages]);
+  }, [fetchPayouts, pagination, search, totalPages]);
 
   useEffect(() => {
-    console.log("searching!");
-  }, [search]);
+    try {
+      if (search.length > 0) {
+        setTimeout(() => searchPayouts(), 500);
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  }, [search, searchPayouts]);
 
   return (
     <main>

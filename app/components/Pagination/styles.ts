@@ -62,5 +62,5 @@ export const Button = styled.button`
 `;
 
 export const ButtonActive = styled(Button)`
-  background-color: #60ca57;
+  background-color: #cf9fff;
 `;
